@@ -1,34 +1,23 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
+import LoginPage from "./components/login/LoginPage";
 
-export default function App() {
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <View style={styles.container}>
-        <Image
-          source={require("./assets/Uvic_logo.png")}
-          style={styles.headerImg}
-        />
-        <StatusBar style="auto" />
-      </View>
-    </SafeAreaView>
-  );
-}
+const App = () => {
+	return (
+		<SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+			<LoginPage />
+			<StatusBar style="auto" />
+		</SafeAreaView>
+	);
+};
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 24,
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  header: {
-    marginVertical: 36,
-  },
-  headerImg: {
-    width: 200,
-    height: 100,
-    alignSelf: "center",
-    marginTop: 150,
-  },
+	container: {
+		padding: 24,
+		flex: 1,
+		backgroundColor: "#fff",
+	},
 });
+
+export default App;
