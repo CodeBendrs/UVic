@@ -4,21 +4,38 @@ import styles from "./loginpage.style";
 import * as SecureStore from "expo-secure-store";
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
+import { connectStorageEmulator } from "firebase/storage";
 
 const LoginPage = () => {
 	const [username, setUsername] = useState();
 	const [password, setPassword] = useState();
 
+	const [storedUsername, setStoredUsername] = useState();
+	const [storedPassword, setStoredPassword] = useState();
+
 	const storeInfo = async () => {
-		await SecureStore.setItemAsync(1, [username, password]);
+		const userInfo = JSON.stringify({ username, password });
+		await SecureStore.setItemAsync("userCredentials", userInfo);
+
 		setUsername();
 		setPassword();
 	};
 
 	const retreiveInfo = async () => {
-		let result = await SecureStore.getItemAsync(1);
-		setUsername = result[0];
-		setPassword = result[1];
+		const result = await SecureStore.getItemAsync("userCredentials");
+
+		if (result) {
+			// Parse the JSON string back to an object
+			console.log(JSON.parse(result));
+			const { username, password } = JSON.parse(result);
+		}
+
+		// Set the state with the retrieved credentials
+		setStoredUsername(username);
+		setStoredPassword(password);
+
+		// setUsername(result); // output: H
+		// setPassword(result[1]); // i
 	};
 
 	return (
@@ -46,6 +63,8 @@ const LoginPage = () => {
 			</TouchableOpacity>
 
 			<Text> Stored Info :</Text>
+			<Text> Username: {storedUsername}</Text>
+			<Text> Password: {storedPassword}</Text>
 		</View>
 	);
 };
