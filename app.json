@@ -4,10 +4,10 @@
 		"slug": "UVic",
 		"version": "1.0.0",
 		"orientation": "portrait",
-		"icon": "./assets/Martlet-blue.png",
+		"icon": "./assets/img/Martlet-blue.png",
 		"userInterfaceStyle": "light",
 		"splash": {
-			"image": "./assets/splash.png",
+			"image": "./assets/img/splash.png",
 			"resizeMode": "contain",
 			"backgroundColor": "#ffffff"
 		},
@@ -16,12 +16,12 @@
 		},
 		"android": {
 			"adaptiveIcon": {
-				"foregroundImage": "./assets/Martlet-blue.png",
+				"foregroundImage": "./assets/img/Martlet-blue.png",
 				"backgroundColor": "#ffffff"
 			}
 		},
 		"web": {
-			"favicon": "./assets/Martlet-blue.png"
+			"favicon": "./assets/img/Martlet-blue.png"
 		},
 		"plugins": ["expo-secure-store"]
 	}
