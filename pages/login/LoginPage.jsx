@@ -2,9 +2,9 @@ import { Text, View, StyleSheet, TextInput, Button, Image } from "react-native";
 import styles from "./loginpage.style";
 import * as SecureStore from "expo-secure-store";
 import { useState, React, useEffect } from "react";
-import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Btn from "../../components/UButton/Btn";
+import authService from "../../services/getCredentials";
 
 const LoginPage = () => {
 	const navigation = useNavigation();
@@ -14,11 +14,11 @@ const LoginPage = () => {
 	}, []);
 
 	const checkIsLoggedIn = async () => {
-		const credentials = await SecureStore.getItemAsync("userCredentials");
-
-		if (credentials) {
-			navigation.navigate("Home");
-		}
+		authService.loadCredentials().then(() => {
+			if (authService.isLoggedIn) {
+				navigation.navigate("Home");
+			}
+		});
 	};
 
 	const [username, setUsername] = useState();
@@ -28,13 +28,12 @@ const LoginPage = () => {
 	const [storedPassword, setStoredPassword] = useState();
 
 	const storeInfo = async () => {
-		const userInfo = JSON.stringify({ username, password });
-		await SecureStore.setItemAsync("userCredentials", userInfo);
+		authService.saveCredentials(username, password).then(() => {
+			setUsername();
+			setPassword();
 
-		setUsername();
-		setPassword();
-
-		navigation.navigate("Home");
+			navigation.navigate("Home");
+		});
 	};
 
 	const retrieveInfo = async () => {

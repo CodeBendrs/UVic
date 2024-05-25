@@ -4,6 +4,8 @@ import { useState, React } from "react";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Btn from "../../components/UButton/Btn";
+import authService from "../../services/getCredentials";
+// import scraper from "../../services/scraper";
 
 const HomePage = () => {
 	const [storedUsername, setStoredUsername] = useState();
@@ -12,28 +14,13 @@ const HomePage = () => {
 	const navigation = useNavigation();
 
 	const deleteCredentials = async () => {
-		const credentials = await SecureStore.getItemAsync("userCredentials");
-
-		if (credentials) {
-			SecureStore.deleteItemAsync("userCredentials");
-		}
-		setStoredUsername();
-		setStoredPassword();
-
+		authService.logout();
 		navigation.navigate("Login");
 	};
 
 	const retrieveInfo = async () => {
-		const result = await SecureStore.getItemAsync("userCredentials");
-
-		if (result != null) {
-			const { username, password } = JSON.parse(result);
-
-			setStoredUsername(username);
-			setStoredPassword(password);
-		} else {
-			console.log("No credentials found");
-		}
+		setStoredUsername(authService.username);
+		setStoredPassword(authService.password);
 	};
 
 	return (
@@ -43,6 +30,7 @@ const HomePage = () => {
 			<Text>Username: {storedUsername}</Text>
 			<Text>Password: {storedPassword}</Text>
 			<Btn text="Retrieve" action={retrieveInfo} />
+			{/* <Btn text="Scrape" action={scraper} /> */}
 		</View>
 	);
 };
