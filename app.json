@@ -1,28 +1,35 @@
 {
-	"expo": {
-		"name": "UVic",
-		"slug": "UVic",
-		"version": "1.0.0",
-		"orientation": "portrait",
-		"icon": "./assets/img/Martlet-blue.png",
-		"userInterfaceStyle": "light",
-		"splash": {
-			"image": "./assets/img/splash.png",
-			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
-		},
-		"ios": {
-			"supportsTablet": true
-		},
-		"android": {
-			"adaptiveIcon": {
-				"foregroundImage": "./assets/img/Martlet-blue.png",
-				"backgroundColor": "#ffffff"
-			}
-		},
-		"web": {
-			"favicon": "./assets/img/Martlet-blue.png"
-		},
-		"plugins": ["expo-secure-store"]
-	}
+  "expo": {
+    "name": "UVic",
+    "slug": "UVic",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/img/Martlet-blue.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/img/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/img/Martlet-blue.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/img/Martlet-blue.png"
+    },
+    "plugins": [
+      "expo-secure-store"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "eb890f27-74a0-4e50-bbff-cc6fcc785319"
+      }
+    }
+  }
 }

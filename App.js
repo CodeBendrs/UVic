@@ -7,6 +7,7 @@ import { useEffect, useState, React } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
+import MyWebView from "./pages/webpage/MyWebView";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ const App = () => {
 				<Stack.Navigator screenOptions={{ headerShown: false }}>
 					<Stack.Screen name="Login" component={LoginPage} />
 					<Stack.Screen name="Home" component={HomePage} />
+					<Stack.Screen name="WebPage" component={MyWebView} />
 				</Stack.Navigator>
 			</NavigationContainer>
 			<StatusBar style="auto" />

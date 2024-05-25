@@ -5,8 +5,6 @@ import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Btn from "../../components/UButton/Btn";
 import authService from "../../services/getCredentials";
-// import scraper from "../../services/scraper";
-
 const HomePage = () => {
 	const [storedUsername, setStoredUsername] = useState();
 	const [storedPassword, setStoredPassword] = useState();
@@ -23,6 +21,10 @@ const HomePage = () => {
 		setStoredPassword(authService.password);
 	};
 
+	const openWebpage = () => {
+		navigation.navigate("WebPage");
+	};
+
 	return (
 		<View>
 			<Text style={{ margin: 50 }}> HELLO WORLD </Text>
@@ -30,7 +32,7 @@ const HomePage = () => {
 			<Text>Username: {storedUsername}</Text>
 			<Text>Password: {storedPassword}</Text>
 			<Btn text="Retrieve" action={retrieveInfo} />
-			{/* <Btn text="Scrape" action={scraper} /> */}
+			{/* <Btn text="webpage" action={openWebpage} /> */}
 		</View>
 	);
 };
