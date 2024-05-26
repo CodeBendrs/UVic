@@ -5,6 +5,8 @@ import Btn from "../../components/UButton/Btn";
 import authService from "../../services/getCredentials";
 
 const HomePage = () => {
+	const SECRET_KEY = "we-are-dangerous";
+
 	const [storedUsername, setStoredUsername] = useState();
 	const [storedPassword, setStoredPassword] = useState();
 
@@ -25,18 +27,13 @@ const HomePage = () => {
 	};
 
 	const handleLogin = async () => {
-		console.log(
-			JSON.stringify({
-				username: authService.username,
-				password: authService.password,
-			})
-		);
 		const response = await fetch(
 			"https://us-central1-uvic-424420.cloudfunctions.net/UvicLogin",
 			{
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					"X-App-Token": SECRET_KEY,
 				},
 				body: JSON.stringify({
 					username: authService.username,
