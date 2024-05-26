@@ -1,10 +1,9 @@
 import { Text, View, StyleSheet, TextInput, Button, Image } from "react-native";
-import * as SecureStore from "expo-secure-store";
 import { useState, React } from "react";
-import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Btn from "../../components/UButton/Btn";
 import authService from "../../services/getCredentials";
+
 const HomePage = () => {
 	const [storedUsername, setStoredUsername] = useState();
 	const [storedPassword, setStoredPassword] = useState();
@@ -25,6 +24,36 @@ const HomePage = () => {
 		navigation.navigate("WebPage");
 	};
 
+	const handleLogin = async () => {
+		console.log(
+			JSON.stringify({
+				username: authService.username,
+				password: authService.password,
+			})
+		);
+		const response = await fetch(
+			"https://us-central1-uvic-424420.cloudfunctions.net/UvicLogin",
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					username: authService.username,
+					password: authService.password,
+				}),
+			}
+		);
+
+		if (response.ok) {
+			const html = await response.text();
+			console.log(html);
+			navigation.navigate("OnlineTools");
+		} else {
+			console.error("Failed to log in:", response.statusText);
+		}
+	};
+
 	return (
 		<View>
 			<Text style={{ margin: 50 }}> HELLO WORLD </Text>
@@ -33,6 +62,7 @@ const HomePage = () => {
 			<Text>Password: {storedPassword}</Text>
 			<Btn text="Retrieve" action={retrieveInfo} />
 			{/* <Btn text="webpage" action={openWebpage} /> */}
+			<Btn text="AutomatedLogin" action={handleLogin} />
 		</View>
 	);
 };
