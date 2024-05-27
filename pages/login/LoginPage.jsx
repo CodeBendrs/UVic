@@ -28,24 +28,15 @@ const LoginPage = () => {
 	const [storedPassword, setStoredPassword] = useState();
 
 	const storeInfo = async () => {
-		authService.saveCredentials(username, password).then(() => {
-			setUsername();
-			setPassword();
-
-			navigation.navigate("Home");
-		});
-	};
-
-	const retrieveInfo = async () => {
-		const result = await SecureStore.getItemAsync("userCredentials");
-
-		if (result != null) {
-			const { username, password } = JSON.parse(result);
-
-			setStoredUsername(username);
-			setStoredPassword(password);
+		if (!username || username === "" || !password || password === "") {
+			console.log("password heni");
 		} else {
-			console.log("No credentials found");
+			authService.saveCredentials(username, password).then(() => {
+				setUsername();
+				setPassword();
+
+				navigation.navigate("Home");
+			});
 		}
 	};
 
