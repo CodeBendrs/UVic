@@ -1,14 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, View, Text, StyleSheet, Image } from "react-native";
-import LoginPage from "./pages/login/LoginPage";
-import HomePage from "./pages/home/Home";
-import * as SecureStore from "expo-secure-store";
 import { useEffect, useState, React } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useNavigation } from "@react-navigation/native";
 import MyWebView from "./pages/webpage/MyWebView";
 import OnlineTools from "./pages/OnlineTools/OnlineTools";
+import LoginPage from "./pages/login/LoginPage";
+import HomePage from "./pages/home/Home";
 
 const Stack = createNativeStackNavigator();
 
