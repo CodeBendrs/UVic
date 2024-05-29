@@ -28,21 +28,17 @@ const LoginPage = () => {
 	const [storedPassword, setStoredPassword] = useState();
 
 	const storeInfo = async () => {
-		if (
-			authService.username == null ||
-			authService.password == null ||
-			!username ||
-			username === "" ||
-			!password ||
-			password === ""
-		) {
+		if (!username || username === "" || !password || password === "") {
 			console.log("password heni");
 		} else {
 			authService.saveCredentials(username, password).then(() => {
 				setUsername();
 				setPassword();
 
-				navigation.navigate("Home");
+				navigation.reset({
+					index: 0,
+					routes: [{ name: "Home" }],
+				});
 			});
 		}
 	};

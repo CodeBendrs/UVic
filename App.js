@@ -7,14 +7,42 @@ import MyWebView from "./pages/webpage/MyWebView";
 import OnlineTools from "./pages/OnlineTools/OnlineTools";
 import LoginPage from "./pages/login/LoginPage";
 import HomePage from "./pages/home/Home";
+import SplashScreen from "./pages/SplashScreen/SplashScreen";
+import authService from "./services/getCredentials";
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+	useEffect(() => {
+		const loadingCredentials = async () => {
+			await authService.loadCredentials();
+		};
+		loadingCredentials();
+	}, []);
+
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
 			<NavigationContainer>
-				<Stack.Navigator screenOptions={{ headerShown: false }}>
+				<Stack.Navigator
+					screenOptions={{
+						headerShown: false,
+						animation: "fade",
+						transitionSpec: {
+							open: {
+								animation: "spring",
+								config: { duration: 1000 },
+							},
+							close: {
+								animation: "spring",
+								config: { duration: 1000 },
+							},
+						},
+
+						// cardStyleInterpolator:
+						// 	TransitionPresets.FadeFromBottomAndroid.cardStyleInterpolator,
+					}}
+				>
+					<Stack.Screen name="Logo" component={SplashScreen} />
 					<Stack.Screen name="Login" component={LoginPage} />
 					<Stack.Screen name="Home" component={HomePage} />
 					<Stack.Screen name="WebPage" component={MyWebView} />

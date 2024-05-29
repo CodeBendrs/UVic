@@ -14,7 +14,10 @@ const HomePage = () => {
 
 	const deleteCredentials = async () => {
 		authService.logout();
-		navigation.navigate("Login");
+		navigation.reset({
+			index: 0,
+			routes: [{ name: "Login" }],
+		});
 	};
 
 	const retrieveInfo = async () => {
